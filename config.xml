@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>HelloCordova</name>
+<widget id="io.ait6613.todolist" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>ToDoList</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        To do list application for cross-platform assignment1
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="6613@ait.nsw.edu.au" href="http://cordova.io">
+        AIT Student 6613 - Anirut Puangkingkaew
     </author>
     <content src="index.html" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
