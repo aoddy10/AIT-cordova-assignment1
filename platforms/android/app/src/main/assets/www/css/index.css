@@ -136,5 +136,5 @@ h1 {
 }
 
 .item-list {
-    height: 42px;
+    min-height: 42px;
 }

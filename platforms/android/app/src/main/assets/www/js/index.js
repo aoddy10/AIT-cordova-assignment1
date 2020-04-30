@@ -1,7 +1,8 @@
-var data = [
-    { task: "Task 1", completed: false },
-    { task: "Task 2", completed: true },
-];
+var localStorage = window.localStorage;
+
+var data = [];
+
+var selectionRecord = null;
 
 var app = {
     // Application Constructor
@@ -13,9 +14,6 @@ var app = {
             false
         );
 
-        // when user move to another application
-        // document.addEventListener("pause", null, false);
-
         // when user move back to application
         document.addEventListener(
             "resume",
@@ -25,13 +23,13 @@ var app = {
 
         // add new task button click
         $("#addTaskButton").click(() => {
-            $("#taskDetail").val("");
+            $("#textAreaTaskDetail").val("");
         });
 
         // save new task
         $("#addTaskSaveButton").click(() => {
             // get value form text field
-            var taskDetail = $("#taskDetail").val();
+            var taskDetail = $("#textAreaTaskDetail").val();
 
             // check if have value
             if (taskDetail) {
@@ -40,24 +38,60 @@ var app = {
                     task: taskDetail,
                     completed: false,
                 });
+
                 // refresh table
                 this.generateList();
+
+                // update data in local storage
+                localStorage.setItem("TASK_DATA", JSON.stringify(data));
             } else {
                 alert("No data");
             }
         });
+
+        // complete button click
+        $("#completeTaskButton").click(() => {
+            // if do not have selectionRecord, do not do any thing
+            if (selectionRecord == null) return;
+
+            // update completed for the record in data with selectRecord.
+            data[selectionRecord].completed = true;
+            this.generateList();
+
+            // update data in local storage
+            localStorage.setItem("TASK_DATA", JSON.stringify(data));
+        });
+
+        // delete button click
+        $("#deleteTaskButton").click(() => {
+            if (selectionRecord == null) return;
+
+            // update completed for the record in data with selectRecord.
+            data.splice(selectionRecord, 1);
+            this.generateList();
+
+            // update data in local storage
+            localStorage.setItem("TASK_DATA", JSON.stringify(data));
+        });
+
+        console.log(data);
     },
 
-    deviceReadyAction: function () {
+    deviceReadyAction: async function () {
         // display welcome screen
         $("#welcome").removeClass("d-none");
-        setTimeout(function () {
-            // get data
-            // display to do list screen
-            $("#welcome").addClass("d-none");
-            $("#list").removeClass("d-none");
-        }, 1000);
+        // get data
+        if (localStorage.getItem("TASK_DATA")) {
+            data = JSON.parse(await localStorage.getItem("TASK_DATA"));
+            console.log(data);
+            console.log("1");
+        }
 
+        // display to do list screen
+        $("#welcome").addClass("d-none");
+        $("#list").removeClass("d-none");
+
+        console.log("2");
         this.generateList();
     },
 
@@ -68,20 +102,43 @@ var app = {
     generateList: function () {
         var listHtml = "";
         if (data.length > 0) {
-            data.forEach((item) => {
+            data.forEach((item, i) => {
                 listHtml +=
-                    '<div class="item-list row p-1 border-bottom align-items-center"><div class="col">' +
+                    '<div id="itemList" data-id="' +
+                    i +
+                    '" class="item-list row p-1 border-bottom align-items-center" data-toggle="modal" data-target="#confirmModalCenter"><div class="col">' +
                     item.task +
-                    '</div><button type="button" class="btn ';
+                    '</div><img src="./img/completed.png" class="icon ';
 
                 if (item.completed == false) listHtml += "d-none";
 
-                listHtml +=
-                    '" data-toggle="modal" data-target="#completeModal"> <img src="./img/completed.png" class="icon" alt="completed"/></button></div>';
+                listHtml += '" alt="completed"/></button></div>';
             });
         }
 
-        $("#itemList").html(listHtml);
+        $("#itemListSection").html(listHtml);
+
+        $(".item-list").click(function () {
+            selectionRecord = $(this).data("id");
+
+            $("#taskDetail").html(data[selectionRecord].task);
+
+            // check if task not complete, show complete title and button
+            // if completed, show delete title and button
+            if (data[selectionRecord].completed == false) {
+                $("#confirmModalLongTitle").html(
+                    "Please confirm to complete task"
+                );
+                $("#completeTaskButton").removeClass("d-none");
+                $("#deleteTaskButton").addClass("d-none");
+            } else {
+                $("#confirmModalLongTitle").html(
+                    "Please confirm to delete task"
+                );
+                $("#deleteTaskButton").removeClass("d-none");
+                $("#completeTaskButton").addClass("d-none");
+            }
+        });
     },
 };
 

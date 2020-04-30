@@ -1,7 +1,6 @@
-var data = [
-    { task: "Task 1", completed: false },
-    { task: "Task 2", completed: true },
-];
+var localStorage = window.localStorage;
+
+var data = [];
 
 var selectionRecord = null;
 
@@ -14,9 +13,6 @@ var app = {
             this.deviceReadyAction.bind(this),
             false
         );
-
-        // when user move to another application
-        // document.addEventListener("pause", null, false);
 
         // when user move back to application
         document.addEventListener(
@@ -42,8 +38,12 @@ var app = {
                     task: taskDetail,
                     completed: false,
                 });
+
                 // refresh table
                 this.generateList();
+
+                // update data in local storage
+                localStorage.setItem("TASK_DATA", JSON.stringify(data));
             } else {
                 alert("No data");
             }
@@ -57,6 +57,9 @@ var app = {
             // update completed for the record in data with selectRecord.
             data[selectionRecord].completed = true;
             this.generateList();
+
+            // update data in local storage
+            localStorage.setItem("TASK_DATA", JSON.stringify(data));
         });
 
         // delete button click
@@ -66,21 +69,29 @@ var app = {
             // update completed for the record in data with selectRecord.
             data.splice(selectionRecord, 1);
             this.generateList();
+
+            // update data in local storage
+            localStorage.setItem("TASK_DATA", JSON.stringify(data));
         });
 
         console.log(data);
     },
 
-    deviceReadyAction: function () {
+    deviceReadyAction: async function () {
         // display welcome screen
         $("#welcome").removeClass("d-none");
-        setTimeout(function () {
-            // get data
-            // display to do list screen
-            $("#welcome").addClass("d-none");
-            $("#list").removeClass("d-none");
-        }, 1000);
+        // get data
+        if (localStorage.getItem("TASK_DATA")) {
+            data = JSON.parse(await localStorage.getItem("TASK_DATA"));
+            console.log(data);
+            console.log("1");
+        }
 
+        // display to do list screen
+        $("#welcome").addClass("d-none");
+        $("#list").removeClass("d-none");
+
+        console.log("2");
         this.generateList();
     },
 
