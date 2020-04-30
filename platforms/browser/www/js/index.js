@@ -80,18 +80,16 @@ var app = {
     deviceReadyAction: async function () {
         // display welcome screen
         $("#welcome").removeClass("d-none");
+
         // get data
         if (localStorage.getItem("TASK_DATA")) {
             data = JSON.parse(await localStorage.getItem("TASK_DATA"));
-            console.log(data);
-            console.log("1");
         }
 
         // display to do list screen
         $("#welcome").addClass("d-none");
         $("#list").removeClass("d-none");
 
-        console.log("2");
         this.generateList();
     },
 

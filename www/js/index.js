@@ -14,13 +14,6 @@ var app = {
             false
         );
 
-        // when user move back to application
-        document.addEventListener(
-            "resume",
-            this.resumeAction.bind(this),
-            false
-        );
-
         // add new task button click
         $("#addTaskButton").click(() => {
             $("#textAreaTaskDetail").val("");
@@ -77,27 +70,17 @@ var app = {
         console.log(data);
     },
 
-    deviceReadyAction: async function () {
-        // display welcome screen
-        $("#welcome").removeClass("d-none");
+    deviceReadyAction: function () {
         // get data
         if (localStorage.getItem("TASK_DATA")) {
-            data = JSON.parse(await localStorage.getItem("TASK_DATA"));
-            console.log(data);
-            console.log("1");
+            data = JSON.parse(localStorage.getItem("TASK_DATA"));
         }
 
         // display to do list screen
-        $("#welcome").addClass("d-none");
         $("#list").removeClass("d-none");
 
-        console.log("2");
         this.generateList();
     },
-
-    resumeAction: function () {},
-
-    getData: function () {},
 
     generateList: function () {
         var listHtml = "";
@@ -107,6 +90,8 @@ var app = {
                     '<div id="itemList" data-id="' +
                     i +
                     '" class="item-list row p-1 border-bottom align-items-center" data-toggle="modal" data-target="#confirmModalCenter"><div class="col">' +
+                    (i + 1) +
+                    ". " +
                     item.task +
                     '</div><img src="./img/completed.png" class="icon ';
 
