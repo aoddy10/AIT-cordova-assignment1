@@ -1,7 +1,5 @@
 var localStorage = window.localStorage;
-
 var data = [];
-
 var selectionRecord = null;
 
 var app = {
