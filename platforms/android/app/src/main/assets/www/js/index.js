@@ -82,9 +82,13 @@ var app = {
         this.generateList();
     },
 
+    // generate list and display in DOM
     generateList: function () {
         var listHtml = "";
+
+        // check if have record in data, create list and add to DOM
         if (data.length > 0) {
+            // loop to create list
             data.forEach((item, i) => {
                 listHtml +=
                     '<div id="itemList" data-id="' +
@@ -100,9 +104,10 @@ var app = {
                 listHtml += '" alt="completed"/></button></div>';
             });
         }
-
+        // add html to DOM
         $("#itemListSection").html(listHtml);
 
+        // blind click event item list
         $(".item-list").click(function () {
             selectionRecord = $(this).data("id");
 
@@ -111,15 +116,19 @@ var app = {
             // check if task not complete, show complete title and button
             // if completed, show delete title and button
             if (data[selectionRecord].completed == false) {
+                // change title
                 $("#confirmModalLongTitle").html(
                     "Please confirm to complete task"
                 );
+                // show/hide button
                 $("#completeTaskButton").removeClass("d-none");
                 $("#deleteTaskButton").addClass("d-none");
             } else {
+                // change title
                 $("#confirmModalLongTitle").html(
                     "Please confirm to delete task"
                 );
+                // show/hide button
                 $("#deleteTaskButton").removeClass("d-none");
                 $("#completeTaskButton").addClass("d-none");
             }

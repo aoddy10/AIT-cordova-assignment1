@@ -11,7 +11,7 @@
             name="viewport"
             content="initial-scale=1, width=device-width, viewport-fit=cover"
         />
-        <title>Hello World</title>
+        <title>ToDoList</title>
 
         <link rel="stylesheet" type="text/css" href="css/index.css" />
 
@@ -43,26 +43,12 @@
                 </button>
             </div>
             <div id="itemListSection">
-                <!-- <div class="row p-1 border-bottom align-items-center">
-                    <div class="col">Task 1</div>
-
-                    <button
-                        type="button"
-                        class="btn"
-                        data-toggle="modal"
-                        data-target="#completeModal"
-                    >
-                        <img
-                            src="./img/completed.png"
-                            class="icon"
-                            alt="completed"
-                        />
-                    </button>
-                </div> -->
+                <!-- will add html here when call generateList() -->
             </div>
         </div>
 
         <!-- add new task Modal -->
+        <!-- display when user click add button -->
         <div
             class="modal fade"
             id="addModalCenter"
@@ -112,6 +98,8 @@
         </div>
 
         <!-- confirm Modal -->
+        <!-- display when user select item is the list. -->
+        <!-- will change title and display button depend on complete status. if complete status is flase, should show confirm to complete. if complete status is true, should show confirm to delete -->
         <div
             class="modal fade"
             id="confirmModalCenter"
