@@ -11,23 +11,26 @@
             name="viewport"
             content="initial-scale=1, width=device-width, viewport-fit=cover"
         />
-        <title>Hello World</title>
+        <title>ToDoList</title>
 
         <link rel="stylesheet" type="text/css" href="css/index.css" />
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-
-        <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="js/jquery-3.4.1.slim.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script
+            type="text/javascript"
+            src="js/jquery-3.4.1.slim.min.js"
+        ></script>
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
     </head>
     <body>
         <!-- list screen -->
         <div id="list" class="container-fluid d-none">
             <div class="header row p-1 bg-primary align-items-center">
-                <h2 class="col align-middle text-light">TO DO LIST</h2>
+                <img class="image-logo" src="./img/logo.png" alt="logo" />
+                <p class="col align-middle text-light">TO DO LIST</p>
 
                 <button
                     id="addTaskButton"
@@ -40,26 +43,12 @@
                 </button>
             </div>
             <div id="itemListSection">
-                <!-- <div class="row p-1 border-bottom align-items-center">
-                    <div class="col">Task 1</div>
-
-                    <button
-                        type="button"
-                        class="btn"
-                        data-toggle="modal"
-                        data-target="#completeModal"
-                    >
-                        <img
-                            src="./img/completed.png"
-                            class="icon"
-                            alt="completed"
-                        />
-                    </button>
-                </div> -->
+                <!-- will add html here when call generateList() -->
             </div>
         </div>
 
         <!-- add new task Modal -->
+        <!-- display when user click add button -->
         <div
             class="modal fade"
             id="addModalCenter"
@@ -109,6 +98,8 @@
         </div>
 
         <!-- confirm Modal -->
+        <!-- display when user select item is the list. -->
+        <!-- will change title and display button depend on complete status. if complete status is flase, should show confirm to complete. if complete status is true, should show confirm to delete -->
         <div
             class="modal fade"
             id="confirmModalCenter"
@@ -136,7 +127,7 @@
                         <button
                             id="completeTaskButton"
                             type="button"
-                            class="btn btn-primary d-none"
+                            class="btn btn-success d-none"
                             data-dismiss="modal"
                         >
                             Completed
@@ -144,7 +135,7 @@
                         <button
                             id="deleteTaskButton"
                             type="button"
-                            class="btn btn-primary d-none"
+                            class="btn btn-danger d-none"
                             data-dismiss="modal"
                         >
                             Delete

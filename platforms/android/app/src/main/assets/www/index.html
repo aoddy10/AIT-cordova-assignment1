@@ -17,17 +17,20 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css" />
-
-        <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="js/jquery-3.4.1.slim.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script
+            type="text/javascript"
+            src="js/jquery-3.4.1.slim.min.js"
+        ></script>
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
     </head>
     <body>
         <!-- list screen -->
         <div id="list" class="container-fluid d-none">
             <div class="header row p-1 bg-primary align-items-center">
-                <h2 class="col align-middle text-light">TO DO LIST</h2>
+                <img class="image-logo" src="./img/logo.png" alt="logo" />
+                <p class="col align-middle text-light">TO DO LIST</p>
 
                 <button
                     id="addTaskButton"
@@ -136,7 +139,7 @@
                         <button
                             id="completeTaskButton"
                             type="button"
-                            class="btn btn-primary d-none"
+                            class="btn btn-success d-none"
                             data-dismiss="modal"
                         >
                             Completed
@@ -144,7 +147,7 @@
                         <button
                             id="deleteTaskButton"
                             type="button"
-                            class="btn btn-primary d-none"
+                            class="btn btn-danger d-none"
                             data-dismiss="modal"
                         >
                             Delete
